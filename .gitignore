@@ -1,0 +1,14 @@
+.venv/
+.browsers/
+node_modules/
+films/
+__pycache__/
+*.pyc
+.DS_Store
+*.mp4
+*.mov
+*.webm
+*.wav
+*.mp3
+*.otf
+*.ttf

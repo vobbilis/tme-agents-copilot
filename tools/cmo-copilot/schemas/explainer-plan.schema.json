@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Non-executable explainer stage plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "project_id", "film_id", "form", "title", "input_fingerprint", "narration_fingerprint", "visual_fingerprint", "timing_status", "source_ids", "scenes", "stages", "production_qualified"],
+  "dependentRequired": {"illustration_binding": ["illustrations"], "illustrations": ["illustration_binding"]},
+  "properties": {
+    "schema_version": {"const": "cmo-explainer-plan-1"},
+    "status": {"const": "planned_not_executable"},
+    "project_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,80}$"},
+    "film_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,80}$"},
+    "form": {"const": "explainer"},
+    "title": {"type": ["string", "null"]},
+    "input_fingerprint": {"$ref": "#/$defs/digest"},
+    "narration_fingerprint": {"$ref": "#/$defs/digest"},
+    "visual_fingerprint": {"$ref": "#/$defs/digest"},
+    "timing_status": {"const": "editorial_estimate_only"},
+    "source_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "scenes": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/scene"}},
+    "stages": {"type": "array", "minItems": 11, "maxItems": 11, "items": {"$ref": "#/$defs/stage"}},
+    "illustration_binding": {"const": "cmo-illustrated-plan-1"},
+    "illustrations": {"$ref": "#/$defs/illustrations"},
+    "production_qualified": {"const": false}
+  },
+  "$defs": {
+    "illustrations": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "base_fingerprints", "scenes"],
+      "properties": {
+        "schema_version": {"const": "cmo-vector-1"},
+        "presentation": {"const": "hpe"},
+        "base_fingerprints": {
+          "type": "object", "additionalProperties": false, "required": ["input", "visual"],
+          "properties": {"input": {"$ref": "#/$defs/digest"}, "visual": {"$ref": "#/$defs/digest"}}
+        },
+        "scenes": {"type": "array", "minItems": 1, "maxItems": 64, "items": {
+          "type": "object", "additionalProperties": false, "required": ["scene_id", "states"],
+          "properties": {
+            "scene_id": {"type": "string", "pattern": "^S[0-9]+$"},
+            "states": {"type": "array", "minItems": 1, "maxItems": 32, "items": {
+              "type": "object", "additionalProperties": false, "required": ["phase", "elements"],
+              "properties": {
+                "phase": {"type": "integer", "minimum": 0, "maximum": 31},
+                "elements": {"type": "array", "minItems": 1, "maxItems": 64, "items": {"$ref": "#/$defs/vectorElement"}}
+              }
+            }}
+          }
+        }}
+      }
+    },
+    "vectorColor": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
+    "vectorElement": {"oneOf": [
+      {"type": "object", "additionalProperties": false,
+       "required": ["type", "x", "y", "width", "height", "fill"],
+       "properties": {
+         "type": {"const": "rect"}, "x": {"type": "number", "minimum": 104, "maximum": 1816},
+         "y": {"type": "number", "minimum": 390, "maximum": 900},
+         "width": {"type": "number", "minimum": 1, "maximum": 1712},
+         "height": {"type": "number", "minimum": 1, "maximum": 510},
+         "fill": {"$ref": "#/$defs/vectorColor"}, "stroke": {"$ref": "#/$defs/vectorColor"},
+         "stroke_width": {"type": "number", "minimum": 1, "maximum": 12}
+       }, "dependentRequired": {"stroke_width": ["stroke"]}},
+      {"type": "object", "additionalProperties": false,
+       "required": ["type", "cx", "cy", "r", "fill"],
+       "properties": {
+         "type": {"const": "circle"}, "cx": {"type": "number", "minimum": 104, "maximum": 1816},
+         "cy": {"type": "number", "minimum": 390, "maximum": 900},
+         "r": {"type": "number", "minimum": 1, "maximum": 850},
+         "fill": {"$ref": "#/$defs/vectorColor"}, "stroke": {"$ref": "#/$defs/vectorColor"},
+         "stroke_width": {"type": "number", "minimum": 1, "maximum": 12}
+       }, "dependentRequired": {"stroke_width": ["stroke"]}},
+      {"type": "object", "additionalProperties": false,
+       "required": ["type", "points", "stroke", "stroke_width"],
+       "properties": {
+         "type": {"const": "polyline"}, "points": {"type": "array", "minItems": 2, "maxItems": 128,
+           "items": {"type": "array", "minItems": 2, "maxItems": 2, "prefixItems": [
+             {"type": "number", "minimum": 104, "maximum": 1816},
+             {"type": "number", "minimum": 390, "maximum": 900}], "items": false}},
+         "stroke": {"$ref": "#/$defs/vectorColor"},
+         "stroke_width": {"type": "number", "minimum": 1, "maximum": 12}
+       }},
+      {"type": "object", "additionalProperties": false,
+       "required": ["type", "x", "y", "width", "height", "text", "font_size", "fill"],
+       "properties": {
+         "type": {"const": "text"}, "x": {"type": "number", "minimum": 104, "maximum": 1816},
+         "y": {"type": "number", "minimum": 390, "maximum": 900},
+         "width": {"type": "number", "minimum": 1, "maximum": 1712},
+         "height": {"type": "number", "minimum": 1, "maximum": 510},
+         "text": {"type": "string", "minLength": 1, "maxLength": 320, "pattern": "\\S"},
+         "font_size": {"type": "number", "minimum": 18, "maximum": 72},
+         "fill": {"$ref": "#/$defs/vectorColor"}
+       }}
+    ]},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"},
+    "text": {"type": "string", "pattern": "\\S"},
+    "texts": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+    "sentence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "text", "source_ids", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "text": {"$ref": "#/$defs/text"},
+        "source_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "status": {"const": "supported"}
+      }
+    },
+    "scene": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "title", "slot", "theme", "status", "labels", "points", "cues", "sentences"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^S[0-9]+$"},
+        "title": {"$ref": "#/$defs/text"},
+        "slot": {"type": "string", "pattern": "^[0-9]{2}:[0-5][0-9]-[0-9]{2}:[0-5][0-9]$"},
+        "theme": {"enum": ["light", "dark"]},
+        "status": {"type": ["string", "null"]},
+        "labels": {"$ref": "#/$defs/texts"},
+        "points": {"$ref": "#/$defs/texts"},
+        "cues": {"$ref": "#/$defs/texts"},
+        "sentences": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/sentence"}}
+      }
+    },
+    "stage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "depends_on", "executable", "blocked_by"],
+      "properties": {
+        "id": {"enum": ["story", "narrate", "pronunciation-check", "build", "test", "check", "snapshot", "review-render", "delivery-render", "finish", "verify"]},
+        "depends_on": {"type": "array", "maxItems": 1, "items": {"type": "string"}},
+        "executable": {"const": false},
+        "blocked_by": {"const": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"]}
+      }
+    }
+  }
+}

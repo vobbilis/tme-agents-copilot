@@ -1,0 +1,7 @@
+{
+  "name": "cmo-filmmaker-tools",
+  "version": "0.1.0",
+  "private": true,
+  "engines": { "node": ">=24.0.0" },
+  "dependencies": { "playwright": "1.42.1", "hyperframes": "0.8.62" }
+}

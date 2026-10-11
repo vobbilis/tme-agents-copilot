@@ -1,0 +1,77 @@
+{
+  "film_id": "signal-to-decision",
+  "form": "explainer",
+  "input_fingerprint": "e37a15b9c441bd40893c465a6c9899adef58cf6d6a0adf2b2a3432b54460a7a5",
+  "narration_fingerprint": "a7f2fbe8421e228e2d61e2abfafd526c193eafb83b1bd6934d7714c2354fd3a3",
+  "production_qualified": false,
+  "project_id": "cmo-first-film",
+  "scenes": [
+    {
+      "cues": ["a signal arrives", "makes the item visible"],
+      "id": "S01",
+      "labels": ["Fictional workflow / No product claims"],
+      "points": ["A signal arrives", "The list makes it visible"],
+      "sentences": [{
+        "id": "sentence-1",
+        "source_ids": ["source-1"],
+        "status": "supported",
+        "text": "In this fictional example, we begin when a signal arrives in a simple list. The list makes the item visible without deciding what it means."
+      }],
+      "slot": "00:00-00:15",
+      "status": "HYPOTHETICAL",
+      "theme": "light",
+      "title": "Notice the signal"
+    },
+    {
+      "cues": ["the relevant context", "human judgment determines"],
+      "id": "S02",
+      "labels": ["Fictional workflow / No product claims"],
+      "points": ["Relevant context", "Human judgment"],
+      "sentences": [{
+        "id": "sentence-2",
+        "source_ids": ["source-1"],
+        "status": "supported",
+        "text": "Before taking action, the reviewer looks at the relevant context around that signal. In this illustration, human judgment determines which details matter and what still needs clarification."
+      }],
+      "slot": "00:15-00:30",
+      "status": "HYPOTHETICAL",
+      "theme": "light",
+      "title": "Read the context"
+    },
+    {
+      "cues": ["records a decision", "an explicit next step"],
+      "id": "S03",
+      "labels": ["Fictional workflow / No product claims"],
+      "points": ["A recorded decision", "An explicit next step"],
+      "sentences": [{
+        "id": "sentence-3",
+        "source_ids": ["source-1"],
+        "status": "supported",
+        "text": "After considering the context, the reviewer records a decision and explains the reasoning. The example ends with an explicit next step, not a claim of an automatic resolution."
+      }],
+      "slot": "00:30-00:45",
+      "status": "HYPOTHETICAL",
+      "theme": "light",
+      "title": "Choose the next step"
+    }
+  ],
+  "schema_version": "cmo-explainer-plan-1",
+  "source_ids": ["source-1"],
+  "stages": [
+    {"blocked_by": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"], "depends_on": [], "executable": false, "id": "story"},
+    {"blocked_by": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"], "depends_on": ["story"], "executable": false, "id": "narrate"},
+    {"blocked_by": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"], "depends_on": ["narrate"], "executable": false, "id": "pronunciation-check"},
+    {"blocked_by": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"], "depends_on": ["pronunciation-check"], "executable": false, "id": "build"},
+    {"blocked_by": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"], "depends_on": ["build"], "executable": false, "id": "test"},
+    {"blocked_by": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"], "depends_on": ["test"], "executable": false, "id": "check"},
+    {"blocked_by": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"], "depends_on": ["check"], "executable": false, "id": "snapshot"},
+    {"blocked_by": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"], "depends_on": ["snapshot"], "executable": false, "id": "review-render"},
+    {"blocked_by": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"], "depends_on": ["review-render"], "executable": false, "id": "delivery-render"},
+    {"blocked_by": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"], "depends_on": ["delivery-render"], "executable": false, "id": "finish"},
+    {"blocked_by": ["PRODUCTION_UNQUALIFIED", "ADAPTER_NOT_QUALIFIED"], "depends_on": ["finish"], "executable": false, "id": "verify"}
+  ],
+  "status": "planned_not_executable",
+  "timing_status": "editorial_estimate_only",
+  "title": "From Signal to Decision",
+  "visual_fingerprint": "cf62f77a5c6a115e7b758ffd3980a684af7c7a0e23cbcea64fb8649f5e7c7a2d"
+}
