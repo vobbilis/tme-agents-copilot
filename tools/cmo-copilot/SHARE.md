@@ -1,9 +1,9 @@
 ---
-title: CMO Filmmaker Handoff
+title: TME Agents Handoff
 description: Direct source-grounded films in ordinary Copilot Chat, with explicit current production capabilities and consent boundaries.
 ---
 
-# CMO Filmmaker
+# TME Agents
 
 Make diagram films, footage films and illustrated explainers in ordinary
 Copilot Chat. Describe your film and provide approved source material; the

@@ -1,9 +1,9 @@
 ---
-title: CMO Filmmaker
+title: TME Agents
 description: Make narrated diagram films, footage films and illustrated explainers in GitHub Copilot Chat.
 ---
 
-# CMO Filmmaker
+# TME Agents
 
 **Your sources. Your story. A director in Copilot Chat.**
 
