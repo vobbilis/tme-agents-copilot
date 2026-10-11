@@ -29,6 +29,23 @@ test('HTML guides share the TME Agents design and resolve local navigation', () 
   }
 })
 
+test('HTML guides support the GitHub Pages publishing root', () => {
+  const site = new URL('https://vobbilis.github.io/tme-agents-copilot/')
+  for (const file of ['index.html', 'install.html', 'lessons.html']) {
+    const document = read(`docs/${file}`)
+    for (const match of document.matchAll(/(?:href|src)="([^"]+)"/g)) {
+      const target = new URL(match[1], new URL(file, site))
+      if (target.origin !== site.origin) continue
+      assert.ok(target.pathname.startsWith(site.pathname),
+        `Link escapes the published docs root: ${match[1]}`)
+    }
+  }
+  assert.ok(existsSync(new URL('docs/.nojekyll', root)))
+  assert.ok(read('README.md').includes(site.href))
+  assert.doesNotMatch(read('README.md'), /It is private/)
+  assert.doesNotMatch(read('docs/install.html'), /repository is private/)
+})
+
 test('HTML guides retain Copilot source, processing and acceptance boundaries', () => {
   const overview = read('docs/index.html')
   const setup = read('docs/install.html')

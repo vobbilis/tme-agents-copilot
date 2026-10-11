@@ -12,9 +12,9 @@ captions. Describe what you want, agree on the story, then review and refine the
 result. The director operates the bundled tools; you make the creative decisions.
 You do not need to write code, prepare JSON or install a custom Copilot plugin.
 
-For the visual guide, open [docs/index.html](docs/index.html) in a browser after
-cloning or downloading the repository. It includes the overview, a setup
-walkthrough with prompts, and field notes from the Copilot work.
+Read the [TME Agents guide](https://vobbilis.github.io/tme-agents-copilot/) for
+the overview, setup prompts and field notes. To browse locally, open
+[docs/index.html](docs/index.html) in a browser after cloning or downloading.
 
 ## What you can make
 
@@ -31,8 +31,8 @@ revision and local delivery of an **MP4 with SRT and VTT captions**.
 
 - **A Mac** with [Visual Studio Code](https://code.visualstudio.com/) and your
   organization's approved GitHub Copilot account.
-- **Access to this repository.** It is private; ask the owner for access if
-  GitHub shows a 404 or cloning fails with a permission error.
+- **A copy of this public repository.** Clone it or download the ZIP; no
+  repository invitation is needed.
 - **An internet connection** for initial downloads, Copilot and approved speech
   generation. The small kit download does not include its installed dependencies.
 - **Permission to use your material.** Bring only sources your organization
@@ -186,7 +186,7 @@ apply to a changed cut.
 
 | What you see | What to do |
 | --- | --- |
-| GitHub shows 404 or clone access fails | Confirm repository access and the GitHub account you are using. |
+| GitHub shows 404 or cloning fails | Check the repository URL and your network access. This repository is public. |
 | Copilot is missing | Install the official GitHub Copilot extension if policy allows, or ask IT. |
 | The director is missing | Confirm you opened the whole kit folder. If it still does not appear, tell the sender; do not install an unrelated plugin. |
 | Setup stops or reports missing tools | Ask the director to explain the failed phase. Preserve completed files and approve any retry separately. |
