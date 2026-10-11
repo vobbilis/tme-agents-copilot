@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Set up TME Agents in VS Code and use ordinary Copilot Chat prompts to make, review and deliver your first film.">
+  <title>TME Agents | Get started</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="navigation.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="masthead-eyebrow">TME Agents &middot; Getting started</div>
+      <h1>Open your <em>studio.</em></h1>
+      <div class="masthead-sub"><p>One folder. One director. A conversation that takes you from setup to a film you can watch, revise and accept.</p></div>
+      <div class="masthead-meta">
+        <div class="meta-item">You need<span>A Mac &middot; VS Code &middot; Copilot access</span></div>
+        <div class="meta-item">You operate<span>cmo-chat-director</span></div>
+        <div class="meta-item">The director handles<span>Commands &middot; JSON &middot; Local tools</span></div>
+      </div>
+    </div>
+  </header>
+  <nav class="toc-bar" aria-label="Guide navigation">
+    <div class="toc-inner">
+      <div class="page-links"><a class="toc-page" href="index.html">Overview</a><a class="toc-page" href="install.html" aria-current="page">Get started</a><a class="toc-page" href="lessons.html">Field notes</a></div>
+      <div class="chapter-links"><a class="toc-link" href="#before">Before you start</a><a class="toc-link" href="#folder">The folder</a><a class="toc-link" href="#setup">Setup</a><a class="toc-link" href="#fonts">Fonts</a><a class="toc-link" href="#film">First film</a><a class="toc-link" href="#help">When it stops</a></div>
+    </div>
+  </nav>
+  <main id="content" class="page" tabindex="-1">
+    <section class="chapter" id="before">
+      <div class="chapter-number">Step 01</div>
+      <h2>Bring access, not an editing skillset</h2>
+      <p class="lead">You need permission to use the tools and the material. The director handles the technical preparation.</p>
+      <ul class="prose-list">
+        <li>A Mac with <a href="https://code.visualstudio.com/">Visual Studio Code</a> and your organization's approved GitHub Copilot account.</li>
+        <li>Access to the private <a href="https://github.com/vobbilis/tme-agents-copilot">TME Agents repository</a>. Ask its owner for access if GitHub returns a 404.</li>
+        <li>An internet connection for setup downloads, Copilot and separately approved speech generation.</li>
+        <li>An idea or source material you may use with Copilot. For a footage film, prepare approved local recordings.</li>
+        <li>Authorized local HPE Graphik assets for the branded film renderers. Font files and licenses are not included.</li>
+      </ul>
+      <p>The guide pages use Fraunces and DM Mono web fonts from Google Fonts. If those requests are unavailable, the pages remain readable with browser fallback fonts. These web fonts are separate from the fonts used in your film.</p>
+    </section>
+    <section class="chapter" id="folder">
+      <div class="chapter-number">Step 02</div>
+      <h2>Get the kit and open the whole folder</h2>
+      <ol class="steps">
+        <li>In VS Code, press <strong>Cmd+Shift+P</strong> and choose <strong>Git: Clone</strong>.</li>
+        <li>Paste the repository address below, sign in if needed, and choose a local destination.</li>
+        <li>Open the cloned <strong>tme-agents-copilot</strong> folder in VS Code.</li>
+        <li>Approve workspace trust only if you trust the source and your policy permits it.</li>
+      </ol>
+      <pre><code>https://github.com/vobbilis/tme-agents-copilot.git</code></pre>
+      <p>Alternatively, use <strong>Code &gt; Download ZIP</strong> on GitHub, extract it and open the extracted folder. A sender-provided kit ZIP works the same way. Choose clone or download; you do not need to clone and then unpack another kit.</p>
+      <p>The folder you open must contain <code>setup.command</code>, <code>START-HERE.md</code>, <code>.github/agents</code> and <code>tools/cmo-copilot</code>. Do not open only a document or the tools subfolder. Finder hides the <code>.github</code> folder; that is expected.</p>
+      <div class="callout"><div class="callout-label">Open the director</div><p>Open <strong>Copilot Chat</strong> and select <strong>cmo-chat-director</strong> from the agent picker. Only the director belongs in the picker; its specialists are intentionally hidden. No custom plugin installation or special slash command is needed.</p></div>
+    </section>
+    <section class="chapter" id="setup">
+      <div class="chapter-number">Step 03</div>
+      <h2>Let the director check the tools</h2>
+      <p class="lead">Send this prompt, then stay in the same Chat. The director checks what your Mac actually has before proposing an installation.</p>
+      <pre id="setup-prompt"><code>Help me set up this kit. Check the local tools and explain anything missing.
+Ask before downloading or installing anything. Do not generate narration,
+artwork or video, or call specialist reviewers yet.</code></pre>
+      <p>Setup checks Python 3.10+, Node 24+ with npm, and FFmpeg/ffprobe. With your permission it installs the kit-local speech, browser and rendering tools: Edge TTS, pypdf, Playwright/Chromium and Hyperframes, including their dependencies and install scripts.</p>
+      <p>Approve only the explained scope. System changes need separate permission and an existing approved Homebrew installation or help from IT. The kit does not install Homebrew, disable security controls or infer permission from opening the folder.</p>
+      <div class="callout callout-green"><div class="callout-label">The result to wait for</div><p><strong>ready</strong> means the offline tool checks passed. <code>tools_present</code> is only an inventory, and <code>setup_required</code> means more setup is needed. Even ready does not verify speech-service access, a complete film, font rights or human acceptance.</p></div>
+      <p>You answer approval questions; the director runs the commands. A failed download or verification does not erase the brief. Keep the completed work and ask for an explanation of the failed phase.</p>
+    </section>
+    <section class="chapter" id="fonts">
+      <div class="chapter-number">Step 04</div>
+      <h2>Bring the right font assets</h2>
+      <p>The current branded renderers require HPE Graphik Regular, Medium and Bold. Obtain them through your approved team or licensing channel, then tell the director where the authorized asset folder lives.</p>
+      <pre><code>my-film-assets/
+  fonts/
+    HPEGraphik-Regular.otf
+    HPEGraphik-Medium.otf
+    HPEGraphik-Bold.otf</code></pre>
+      <p>This is the expected folder layout, not a download included in the repository. The director supplies the absolute asset path to the tools. Rendering stops if the required font assets are missing or invalid; it must not silently substitute another font.</p>
+      <p>The shared film frame includes the HPE header, chapter footer and reserved caption space. Using those assets does not create permission to redistribute the font files or publish your film outside its authorized channels.</p>
+    </section>
+    <section class="chapter" id="film">
+      <div class="chapter-number">Step 05</div>
+      <h2>Make your first film</h2>
+      <p class="lead">Use one prompt at a time. Replace the bracketed parts, answer the director's questions, and continue from the information already agreed.</p>
+      <h3>Shape the story</h3>
+      <pre id="story-prompt"><code>Help me make a film about [topic] for [audience], about [duration] long.
+My sources are at [local file paths], or I can describe the idea.
+Ask which material you may read. Recommend a film form and propose a brief,
+narration and visual plan for me to review. Ask before saving project files.</code></pre>
+      <p>The packaged reader supports UTF-8 text and Markdown, ordinary unencrypted PowerPoint slide text, PDF page text and Word document body text. Speaker notes need separate approval. This is text reading, not visual interpretation of charts, scanning of documents or audio transcription.</p>
+      <p>Confirm the authoritative sources and the claims they support. You can start without source files; the director should propose creative defaults and identify what still needs confirmation rather than inventing product facts.</p>
+      <h3>Produce the agreed story</h3>
+      <pre id="production-prompt"><code>Use the story and visual plan we agreed on. Explain the required narration,
+artwork, rendering and specialist reviews, including their scope and any
+estimated costs. Ask for the necessary permissions before running them.
+Then give me the resulting cut to watch and listen to.</code></pre>
+      <p>Edge TTS receives separately approved narration text. Local rendering uses the approved plan and assets. Installation approval does not authorize these operations, and the kit does not promise a fixed render time.</p>
+      <h3>Ask for a change</h3>
+      <pre id="revision-prompt"><code>At [timestamp or scene], change [what needs changing] to [what I want].
+Keep the previous cut. Explain which steps need to run again and ask before
+processing. Reuse unchanged work where the existing tools support it.</code></pre>
+      <p>A revised cut needs its own review. Changed narration can require new speech and timing; a visual change may leave audio reusable but still require new artwork or a render.</p>
+      <h3>Review and take delivery</h3>
+      <pre id="review-prompt"><code>Help me record my decision and actual watch/listen and privacy-review results
+for this exact cut. If I accept it and the required reviews are complete,
+ask permission to deliver the MP4 and captions to [local delivery folder].
+Do not upload or publish anything.</code></pre>
+      <p>Watch the film with sound and report what you actually reviewed. The director records acceptance against that cut and checks the local delivery files. The result includes the MP4, captions and the associated review and delivery records.</p>
+      <h3>Come back later</h3>
+      <p>Before leaving, ask the director to save a checkpoint and a handoff, with your permission. In a fresh director Chat, use:</p>
+      <pre id="resume-prompt"><code>Resume my film from [saved handoff path]. Ask before reading saved material.
+Use the existing checkpoint, check for changed inputs, and tell me the next
+unfinished step. Do not repeat completed processing or assume earlier approvals
+apply to a changed cut.</code></pre>
+    </section>
+    <section class="chapter" id="help">
+      <div class="chapter-number">When something stops</div>
+      <h2>Keep the work. Name the problem.</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">What you see</th><th scope="col">What to do</th></tr></thead>
+          <tbody>
+            <tr><td>Repository not found</td><td>Check your GitHub account and repository access. The repository is private.</td></tr>
+            <tr><td>No Copilot Chat</td><td>Use your organization's approved Copilot account and official extension, or ask IT.</td></tr>
+            <tr><td>No director in the picker</td><td>Confirm the whole kit folder is open. If the director remains missing, report it to the sender; do not install an unrelated plugin.</td></tr>
+            <tr><td>Setup cannot find its script</td><td>Tell the director to resolve the kit's absolute setup-script path for every terminal call, without relying on a previous working directory.</td></tr>
+            <tr><td>A download or check fails</td><td>Preserve the completed files. Ask which phase failed and approve any retry separately. Do not delete environments or bypass workstation controls.</td></tr>
+            <tr><td>Missing font assets</td><td>Supply the approved local font folder. The kit cannot download a license or substitute the required fonts.</td></tr>
+            <tr><td>A request to write scripts or JSON</td><td>Ask the director to operate the packaged tools. A missing capability should be explained, not replaced with an invented pipeline.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Clean-copy setup passed in a fresh Chat on the same Mac used for the local films. Another Mac and optional Swift OCR compilation remain unverified. The <a href="lessons.html#validation">validation notes</a> distinguish demonstrated work from remaining limits.</p>
+    </section>
+    <footer class="footer">
+      <p>TME Agents &middot; Getting started &middot; October 2026</p>
+      <div class="footer-links"><a href="index.html">Overview</a><a href="lessons.html">Field notes</a><a href="../START-HERE.md">Detailed operator guide</a><a href="../README.md">Repository README</a></div>
+    </footer>
+  </main>
+</body>
+</html>

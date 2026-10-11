@@ -12,6 +12,10 @@ captions. Describe what you want, agree on the story, then review and refine the
 result. The director operates the bundled tools; you make the creative decisions.
 You do not need to write code, prepare JSON or install a custom Copilot plugin.
 
+For the visual guide, open [docs/index.html](docs/index.html) in a browser after
+cloning or downloading the repository. It includes the overview, a setup
+walkthrough with prompts, and field notes from the Copilot work.
+
 ## What you can make
 
 | Film form | Use it for | Start with |
