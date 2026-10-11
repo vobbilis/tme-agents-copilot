@@ -29,13 +29,21 @@ test('HTML guides share the TME Agents design and resolve local navigation', () 
   }
 })
 
+test('HTML overview masthead links back to the Claude edition', () => {
+  const masthead = read('docs/index.html')
+    .match(/<header class="masthead">[\s\S]*?<\/header>/)?.[0]
+  assert.ok(masthead)
+  assert.match(masthead, /href="https:\/\/vobbilis\.github\.io\/tme-agents\/"/)
+  assert.match(masthead, />Claude Code overview<\/a>/)
+})
+
 test('HTML guides support the GitHub Pages publishing root', () => {
   const site = new URL('https://vobbilis.github.io/tme-agents-copilot/')
   for (const file of ['index.html', 'install.html', 'lessons.html']) {
     const document = read(`docs/${file}`)
     for (const match of document.matchAll(/(?:href|src)="([^"]+)"/g)) {
       const target = new URL(match[1], new URL(file, site))
-      if (target.origin !== site.origin) continue
+      if (URL.canParse(match[1]) || target.origin !== site.origin) continue
       assert.ok(target.pathname.startsWith(site.pathname),
         `Link escapes the published docs root: ${match[1]}`)
     }
